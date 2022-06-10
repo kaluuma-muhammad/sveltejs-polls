@@ -2,6 +2,8 @@
 	import Header from "./components/Header.svelte";
 	import Footer from "./components/Footer.svelte";
 	import Tabs from "./shared/Tabs.svelte";
+	import PollsList from "./Polls/PollList.svelte";
+	import AddPoll from "./Polls/AddPoll.svelte";
 
 	// tabs
 	let items = ['All Polls', 'Add New Poll'];
@@ -10,15 +12,34 @@
 	const changeTab = (e) => {
 		activeItem = e.detail;
 	}
+
+	// Polls
+	let polls = [
+		{
+			id: 1,
+			question: "Is JavaScript the best language",
+			answerA: "Yes",
+			answerB: "No",
+			votesA: 179,
+			votesB: 96
+		}
+	];
+
+	// Add poll
+	const addPoll = (e) => {
+		let poll = e.detail;
+		polls = [poll, ...polls];
+		activeItem = 'All Polls';
+	}
 </script>
 
 <Header />
 <main>
 	<Tabs {activeItem} {items} on:changeTab={changeTab} />
 	{#if activeItem === 'All Polls'}
-		<p>All polls list component goes here</p>
+		<PollsList {polls} />
 	{:else if activeItem === 'Add New Poll'}
-		<p>Polls Form component goes here</p>
+		<AddPoll on:add={addPoll}/>
 	{/if}
 </main>
 <Footer />
