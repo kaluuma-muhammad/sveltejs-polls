@@ -13,18 +13,6 @@
 		activeItem = e.detail;
 	}
 
-	// Polls
-	let polls = [
-		{
-			id: 1,
-			question: "Is JavaScript the best language",
-			answerA: "Yes",
-			answerB: "No",
-			votesA: 179,
-			votesB: 96
-		}
-	];
-
 	// Add poll
 	const addPoll = (e) => {
 		let poll = e.detail;
@@ -53,7 +41,7 @@
 <main>
 	<Tabs {activeItem} {items} on:changeTab={changeTab} />
 	{#if activeItem === 'All Polls'}
-		<PollsList {polls} on:vote={handleVote} />
+		<PollsList on:vote={handleVote} />
 	{:else if activeItem === 'Add New Poll'}
 		<AddPoll on:add={addPoll}/>
 	{/if}
