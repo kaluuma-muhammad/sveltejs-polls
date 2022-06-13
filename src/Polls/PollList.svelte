@@ -1,17 +1,30 @@
 <script>
+    // Lifecycle hooks
+    // import { onDestroy, onMount } from 'svelte';
     import PollStore from '../stores/PollsStore';
     import PollDetails from "./PollDetails.svelte";
     
-    export let polls = [];
+    // export let polls = [];
 
-    PollStore.subscribe(data => {
-        polls = data;
-    })
+    // const unsub = PollStore.subscribe(data => {
+    //     polls = data;
+    // });
+
+    // onMount(() => {
+    //     // Get data from the db
+    //     console.log("Component mounted");
+    // });
+
+    // onDestroy(() => {
+    //     // Un subscribe from store
+    //     console.log("Component destroyed");
+    //     unsub();
+    // });
 </script>
 
 <main>
     <div class="polls-list">
-        {#each polls as poll (poll.id)}
+        {#each $PollStore as poll (poll.id)}
             <div>
                 <PollDetails {poll} on:vote />
             </div>
